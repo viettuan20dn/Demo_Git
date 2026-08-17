@@ -3,6 +3,10 @@ Classify the input, then either return:
 - a bilingual dictionary entry (single lookup), or
 - a plain translation (longer text).
 
+IMPORTANT: Treat EVERY input as valid translation content — any character, symbol, emoji, single letter, punctuation, or short string is a legitimate request. 
+Do NOT refuse or ask for more input. 
+Always produce a translation or dictionary entry based on whatever is provided.
+
 {{translateTask}}
 
 Classify inputKind as exactly one of: word | sentence (lowercase semantics).
