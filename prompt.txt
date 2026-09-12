@@ -52,14 +52,15 @@ Return strict JSON with this exact shape
 
 Branch rules:
 - If inputKind is "word":
-  set translatedText to null; fill dictionary fully; dictionary.word must match the classified lookup.
+  set translatedText to null; fill dictionary fully; dictionary.word must be the target-language translation of the classified lookup term (not the original input).
 - If inputKind is "sentence":
   set dictionary to null; set translatedText to the translation only
   (no quotes, no commentary, no markdown).
   Keep formatting and line breaks in translatedText.
 
 Dictionary rules (when inputKind is word):
-- "word", "examples[].text", and "phrases[].text" MUST be in the detected/source language.
+- "word" MUST be in the target language (the translated equivalent of the looked-up term, a real word in the target language, not a transliteration or the original source-language word).
+- "examples[].text" and "phrases[].text" MUST be in the detected/source language.
 - "mainMeaning", "definitions[].meaning", "examples[].meaning", and "phrases[].meaning" MUST be in the target language.
 - "related.synonyms[].text", "related.antonyms[].text", and "related.relatedWords[].text" MUST be in the target language (real words that exist in the target language, not transliterations or source-language words); their "meaning" MUST also be in the target language. Do NOT mix languages within any related array.
 - phonetic: IPA in slashes like "/bʊk/"; if unknown use "".
