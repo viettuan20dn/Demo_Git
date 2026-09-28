@@ -46,7 +46,7 @@ Return strict JSON with this exact shape
 - If inputKind is "sentence", output:
 {
   "inputKind": "sentence",
-  "translatedText": "string",
+  "translatedText": "string (in {{targetLang}})",
   "dictionary": null
 }
 
@@ -57,6 +57,9 @@ Branch rules:
   set dictionary to null; set translatedText to the translation only
   (no quotes, no commentary, no markdown).
   Keep formatting and line breaks in translatedText.
+  "translatedText" MUST be written entirely in the target language ({{targetLang}}).
+  If the input mixes languages, translate every part into {{targetLang}}; do not leave any word in the source language or any other language.
+  Only keep proper nouns, brand names, URLs, code, and numbers as-is when they have no standard {{targetLang}} form.
 
 Dictionary rules (when inputKind is word):
 - "word" MUST be in the target language (the translated equivalent of the looked-up term, a real word in the target language, not a transliteration or the original source-language word).
