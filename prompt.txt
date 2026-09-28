@@ -70,7 +70,8 @@ Dictionary rules (when inputKind is word):
 - Interpret the input exactly as written, including its diacritics/tone marks; do not swap it for a similar-looking word. "translatedText", "mainMeaning" and the first definition MUST describe the same primary sense.
 - examples[].text MUST be a real, natural sentence in the source language that contains the input word — never just the word itself.
 - phonetic: IPA in slashes like "/bʊk/"; if unknown use "".
-- mainMeaning: 1-3 primary meanings in one string; multiple meanings separated by ";".
+- mainMeaning: 1-3 primary meanings in one string, written in {{targetLang}}; multiple meanings separated by ";".
+- definitions[].partOfSpeech: English lowercase label (noun, verb, adjective, adverb, pronoun, preposition, conjunction, interjection, particle, classifier, numeral).
 - definitions: include all distinct common senses; sort by estimated frequency (most common first). Include all common parts of speech for that word.
 - related.antonyms: base on the primary sense from mainMeaning and the first definition; use accepted everyday opposites; for spatial/positional terms include canonical opposites; if none fit, [].
 - Keep arrays concise: at most 3 examples, 3 phrases, 3 synonyms, 3 antonyms, 3 relatedWords. Always include all keys; empty arrays allowed where appropriate.
