@@ -18,7 +18,7 @@ Return strict JSON with this exact shape
 - If inputKind is "word", output:
 {
   "inputKind": "word",
-  "translatedText": null,
+  "translatedText": "string",
   "dictionary": {
     "word": "string",
     "phonetic": "string",
@@ -54,14 +54,21 @@ Return strict JSON with this exact shape
 
 Branch rules:
 - If inputKind is "word":
-  set translatedText to null; fill dictionary fully; dictionary.word must match the classified lookup.
+  set translatedText to the most common {{targetLang}} equivalent of the input (a real {{targetLang}} word, no quotes, no commentary);
+  fill dictionary fully;
+  dictionary.word MUST be the input text exactly as given (do not translate, correct, or transliterate it).
 - If inputKind is "sentence":
   set dictionary to null; set translatedText to the translation only
   (no quotes, no commentary, no markdown).
   Keep formatting and line breaks in translatedText.
+- For both branches, "translatedText" MUST be written entirely in the target language ({{targetLang}}).
+  If the input mixes languages, translate every part into {{targetLang}}; do not leave any word in the source language or any other language.
+  Only keep proper nouns, brand names, URLs, code, and numbers as-is when they have no standard {{targetLang}} form.
 
 Dictionary rules (when inputKind is word):
 - "word" and every "text" field MUST be in the detected/source language; every "meaning" field MUST be in the target language.
+- Interpret the input exactly as written, including its diacritics/tone marks; do not swap it for a similar-looking word. "translatedText", "mainMeaning" and the first definition MUST describe the same primary sense.
+- examples[].text MUST be a real, natural sentence in the source language that contains the input word — never just the word itself.
 - phonetic: IPA in slashes like "/bʊk/"; if unknown use "".
 - mainMeaning: 1-3 primary meanings in one string; multiple meanings separated by ";".
 - definitions: include all distinct common senses; sort by estimated frequency (most common first). Include all common parts of speech for that word.
